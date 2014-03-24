@@ -1,7 +1,7 @@
 {
   "name": "angular-template-project",
-  "homepage": "https://github.com/marcorinck/ngStart",
-  "main": "src/main/css/project.css",
+  "homepage": "https://github.com/ChristophT/WebChronik",
+  "main": "app/css/project.css",
   "ignore": [
     ".jshintrc",
     "**/*.txt"

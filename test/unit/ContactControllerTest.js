@@ -23,7 +23,7 @@ define(["contact/ContactController"], function(ContactController) {
 
 
 		it("should be the authors name", function () {
-			expect(scope.author).toBe("Marco Rinck");
+			expect(scope.author).toBe("Christoph Thelen");
 		});
 	});
 

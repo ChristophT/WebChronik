@@ -2,9 +2,9 @@ define(function () {
 	"use strict";
 
 	var ContactController = function($scope, contactService, config) {
-		$scope.author = "Marco Rinck";
-		$scope.email = "marco.rinck@googlemail.com";
-		$scope.homepage = "https://github.com/marcorinck/ngStart";
+		$scope.author = "Christoph Thelen";
+		$scope.email = "thelen.christoph@gmail.com";
+		$scope.homepage = "https://github.com/ChristophT/WebChronik";
 		$scope.message = contactService.message;
 
 		$scope.messageChanged = function() {

@@ -17,7 +17,7 @@
 
 	require({
 		// "/base" is the URL from where karma is serving project files
-		baseUrl:'/base/src/main/modules',
+		baseUrl:'/base/app/modules',
 		paths:{
 			'angular':'/base/bower_components/angular/angular',
 			'angular-route':'/base/bower_components/angular-route/angular-route',
