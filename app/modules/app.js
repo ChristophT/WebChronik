@@ -1,4 +1,4 @@
-define(['angular', 'config/config', 'angular-route', 'about/about', 'contact/contact', 'navbar/navbar'], function (angular, config) {
+define(['angular', 'config/config', 'angular-route', 'familie/familie', 'about/about', 'navbar/navbar'], function (angular, config) {
 	"use strict";
 
     var app = angular.module("app", config.standardAngularModules);
@@ -6,7 +6,7 @@ define(['angular', 'config/config', 'angular-route', 'about/about', 'contact/con
 	app.config(['$httpProvider', '$routeProvider', function ($httpProvider, $routeProvider) {
 		var httpLogInterceptor;
 
-		$routeProvider.otherwise({redirectTo: '/about/'});
+		$routeProvider.otherwise({redirectTo: '/familie/'});
 
 		httpLogInterceptor = ['$q', function ($q) {
 

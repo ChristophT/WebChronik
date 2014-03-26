@@ -4,7 +4,8 @@
 		paths: {
 			'angular': '../../../bower_components/angular/angular',
 			'angular-route': '../../../bower_components/angular-route/angular-route',
-			'angular-mocks': '../../../bower_components/angular-mocks/angular-mocks'
+			'angular-mocks': '../../../bower_components/angular-mocks/angular-mocks',
+            'sjcl': '../../../bower_components/sjcl/sjcl'
 		},
 		shim: {
 			'angular': { deps: [], exports: 'angular' },

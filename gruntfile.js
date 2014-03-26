@@ -190,7 +190,7 @@ module.exports = function (grunt) {
 
 				src: ["**/*", "!modules/main.js.map", "!modules/main.js.src",
 					//TODO - remove folder names manually, update grunt-manifest to have it done automatically
-					"!js", "!css", "!images", "!images/build", "!modules", "!modules/about", "!modules/contact",
+					"!js", "!css", "!images", "!images/build", "!modules", "!modules/about", "!modules/familie",
 					"!modules/navbar", "!modules/translations"],
 				dest: "<%= pkg.folders.build + pkg.name + '-' + pkg.version + '/' + pkg.name %>.manifest"
 			}
