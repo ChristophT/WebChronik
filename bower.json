@@ -11,7 +11,8 @@
     "angular-route": "1.2.x",
     "almond": "0.2.x",
     "requirejs": "2.1.x",
-    "sjcl": "1.0.x"
+    "sjcl": "1.0.x",
+    "angularfire": "x"
   },
   "devDependencies": {
     "angular-mocks": "1.2.x"

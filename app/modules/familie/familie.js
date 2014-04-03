@@ -1,4 +1,4 @@
-define(['angular', 'familie/FamilieController', 'angular-route' ], function (angular, FamilieController) {
+define(['angular', 'familie/FamilieController', 'familie/FamilieService', 'angular-route' ], function (angular, FamilieController, FamilieService) {
     "use strict";
 
     var familie = angular.module("familie", ['ngRoute']);
@@ -10,6 +10,8 @@ define(['angular', 'familie/FamilieController', 'angular-route' ], function (ang
         });
 
     }]);
+
+    familie.service('FamilieService', FamilieService);
 
     return familie;
 });

@@ -1,4 +1,4 @@
-define(['angular', 'config/config', 'angular-route', 'familie/familie', 'about/about', 'navbar/navbar'], function (angular, config) {
+define(['angular', 'config/config', 'angular-route', 'familie/familie', 'about/about', 'navbar/navbar', 'firebase'], function (angular, config) {
 	"use strict";
 
     var app = angular.module("app", config.standardAngularModules);
