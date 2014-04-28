@@ -7,8 +7,8 @@ module.exports = function (config) {
 		files: [
 			'test/main-test.js',
 			{pattern: 'bower_components/**/*.js', included: false},
-			{pattern: 'test/unit/**/*.js', included: false},
-			{pattern: 'app/modules/**/*.js', included: false}
+			{pattern: 'app/modules/**/*.js', included: false},
+			{pattern: 'test/unit/**/*.js', included: false}
 
 		],
 

@@ -1,7 +1,7 @@
 define(['angular', 'config/config', 'angular-route', 'familie/familie', 'about/about', 'navbar/navbar', 'firebase'], function (angular, config) {
 	"use strict";
 
-    var app = angular.module("app", config.standardAngularModules);
+    var app = angular.module("chronik", config.standardAngularModules);
 
 	app.config(['$httpProvider', '$routeProvider', function ($httpProvider, $routeProvider) {
 		var httpLogInterceptor;

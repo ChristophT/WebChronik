@@ -21,7 +21,9 @@
 		paths:{
 			'angular':'/base/bower_components/angular/angular',
 			'angular-route':'/base/bower_components/angular-route/angular-route',
-			'mocks':'/base/bower_components/angular-mocks/angular-mocks'
+			'mocks':'/base/bower_components/angular-mocks/angular-mocks',
+            'sjcl': '/base/bower_components/sjcl/sjcl',
+            'firebase': '/base/bower_components/firebase/firebase'
 		},
 		shim:{
 			'angular':{ deps:[], exports:'angular' },

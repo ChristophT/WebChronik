@@ -1,14 +1,16 @@
 <span style="margin-top: 50px;"></span>
 <div class="row">
-    <div class="col-sm-3"></div>
+    <div class="col-sm-2"></div>
     <div class="col-sm-2" style="background-color: blue;height: 160px">{{mutter}}</div>
-    <div class="col-sm-1"></div>
-    <div class="col-sm-1"></div>
+    <div class="col-sm-2"></div>
+    <div class="col-sm-2"></div>
     <div class="col-sm-2" style="background-color: green;height: 160px">{{vater}}</div>
-    <div class="col-sm-3"></div>
+    <div class="col-sm-2"></div>
 </div>
 <div class="row" style="margin-top: 50px">
     <div class="col-sm-{{spaltenVorKindern()}}"></div>
-    <div class="col-sm-2" ng-repeat="kind in kinder">{{kind}}</div>
-    <div class="col-sm-3"></div>
+    <div ng-repeat="kind in kinder">
+        <div class="col-sm-2" style="height: 160px; border: 1px solid grey">{{kind.name}}</div>
+        <div ng-if="!isLetztesKind(kind)" class="col-sm-{{spaltenBreiteZwischenKindern()}}"></div>
+    </div>
 </div>

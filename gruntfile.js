@@ -159,7 +159,7 @@ module.exports = function (grunt) {
 						'config/configuration': 'config/<%=configuration%>'
 					},
 					generateSourceMaps: true,
-					preserveLicenseComments: false,
+					preserveLicenseComments: true,
 					useSourceUrl: true,
 					uglify2: {
 						// TODO - angular.js is already minified, mangling destroys it, so mangling is currently globally disabled

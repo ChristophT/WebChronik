@@ -3,7 +3,7 @@ define(["angular", "config/configuration"], function(angular, configuration) {
 
     var standardAngularModules = ["ngRoute", "familie", "about", "navbar", "config"],
         standardRequireModules = ["angular", "app"],
-        config = angular.module('config', []);
+        config = angular.module('config', function() {});
 
 
 

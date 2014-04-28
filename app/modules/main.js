@@ -18,7 +18,7 @@
 	require(["config/config"], function (config) {
 
 		require(config.standardRequireModules, function (angular) {
-			angular.bootstrap(document, ["app"]);
+			angular.bootstrap(document, ["chronik"]);
 		});
 	});
 }(require));
