@@ -1,10 +1,10 @@
-define(['angular', 'familie/FamilieController', 'familie/FamilieService', 'angular-route' ], function (angular, FamilieController, FamilieService) {
+define(['angular', 'familie/FamilieController', 'familie/FamilieService', 'angular-route', 'firebase', 'angularfire'], function (angular, FamilieController, FamilieService) {
     "use strict";
 
-    var familie = angular.module("familie", ['ngRoute']);
+    var familie = angular.module("familie", ['ngRoute', 'firebase']);
 
     familie.config(["$routeProvider", function($routeProvider) {
-        $routeProvider.when('/familie/', {
+        $routeProvider.when('/familie/:familieId', {
             templateUrl: "modules/" + 'familie/familie.html',
             controller: FamilieController
         });
