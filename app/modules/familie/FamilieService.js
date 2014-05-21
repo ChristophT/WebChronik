@@ -1,51 +1,57 @@
-define(['angularfire', 'sjcl'], function () {
+define(['angular', 'sjcl', 'angularfire'], function (angular, sjcl) {
     "use strict";
 
-    var FamilieService = function ($q, $firebase) {
-        var familien = {}, getFamilie;
+    var FamilieService = function ($firebase, $q) {
+        var familien = {}, getFamilie, loadFamilien, warteliste = {};
         var familenRef = new Firebase('https://resplendent-fire-8728.firebaseio.com/familien');
-        var familienQuelle = $firebase(familenRef);
+
+        loadFamilien = function () {
+            var familienQuelle = $firebase(familenRef);
+
+            familienQuelle.$on('loaded', function (snap) {
+                if (angular.isArray(snap)) {
+                    for (var snapFamilieId in snap) {
+                        if (snap.hasOwnProperty(snapFamilieId)) {
+                            var klartext = sjcl.decrypt('AuGjygdfo8)%lÖI!!AWdbf#KklgklsBHJslk', snap[snapFamilieId], {}, {});
+                            familien[snapFamilieId] = JSON.parse(klartext);
+
+                            if (warteliste[snapFamilieId]) {
+                                warteliste[snapFamilieId].resolve(familien[snapFamilieId]);
+                                delete warteliste[snapFamilieId];
+                            }
+                        }
+                    }
+                } else {
+                    console.log('snap enthält nicht das erwartete Array');
+                }
+            });
+        };
 
         getFamilie = function(id) {
             var deferred = $q.defer();
 
-            if (!familien[id]) {
-                var zielFamilie = familienQuelle.$child(id);
-
-                zielFamilie.$on('value', function(snap) {
-                    if (snap.snapshot.value) {
-                        var klartext = sjcl.decrypt('falsch!', snap.snapshot.value, {}, {}),
-                            familie = JSON.parse(klartext);
-
-                        familien[id] = familie;
-                        deferred.resolve(familie);
-                    } else {
-                        console.log('snap.snapshot.value ist leer');
-                        deferred.reject();
-                    }
-                });
-            } else {
+            if (familien[id]) {
                 deferred.resolve(familien[id]);
+            } else {
+                if (warteliste[id]) {
+                    deferred = warteliste[id];
+                } else {
+                    warteliste[id] = deferred;
+                    loadFamilien();
+                }
             }
             return deferred.promise;
         };
 
-        familien['23'] = {
-            MannId: 'ich',
-            FrauId: 'du',
-            Kinder: [
-                {name: 'Silvie'},
-                {name: 'Gwen'},
-                {name: 'Nr3'},
-                {name: 'Nr4'}
-            ]
-        };
+        loadFamilien();
+
         return {
+            loadFamilien: loadFamilien,
             getFamilie: getFamilie
         };
     };
 
-    FamilieService.$inject = ['$q', '$firebase'];
+    FamilieService.$inject = ['$firebase', '$q'];
 
     return FamilieService;
 });
