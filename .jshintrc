@@ -29,6 +29,7 @@
 		"window": true,
 		"beforeEach": true,
 		"module": true,
-		"inject": true
+		"inject": true,
+        "Firebase": true
 	}
 }

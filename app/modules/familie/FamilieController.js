@@ -1,7 +1,7 @@
 define(function () {
     "use strict";
 
-    var FamilieController = function($scope, $routeParams, FamilieService) {
+    var FamilieController = function($scope, $routeParams, FamilieService, PersonService) {
         var aktuelleFamilieId;
 
         aktuelleFamilieId = $routeParams.familieId;
@@ -13,6 +13,10 @@ define(function () {
         function isFamilieDefined() {
             return $scope.familie && $scope.familie.Kinder;
         }
+
+        $scope.getPerson = function(id) {
+            return PersonService.getPerson(id);
+        };
 
         $scope.spaltenVorKindern = function() {
             if (isFamilieDefined()) {
@@ -37,7 +41,7 @@ define(function () {
         };
     };
 
-    FamilieController.$inject = ['$scope', '$routeParams', 'FamilieService'];
+    FamilieController.$inject = ['$scope', '$routeParams', 'FamilieService', 'PersonService'];
 
     return FamilieController;
 });

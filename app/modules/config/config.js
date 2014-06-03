@@ -1,7 +1,7 @@
 define(["angular", "config/configuration"], function(angular, configuration) {
    "use strict";
 
-    var standardAngularModules = ["ngRoute", "familie", "about", "navbar", "config"],
+    var standardAngularModules = ["ngRoute", "familie", "person", "about", "navbar", "config"],
         standardRequireModules = ["angular", "app"],
         config = angular.module('config', function() {});
 

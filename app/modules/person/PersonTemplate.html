@@ -1,0 +1,8 @@
+{{person.Vorname1}} <span ng-class="person.Vorname1 || person.Vorname2 ? 'rufname' : ''">{{person.Rufname}}</span> {{person.Vorname2}}<br>
+{{person.Nachname}} <span ng-show="person.Geburtsname">geb. {{person.Geburtsname}}</span><br>
+<span ng-show="person.Geburtstag || person.Geburtsmonat || person.Geburtsjahr">
+    * <span ng-show="person.Geburtstag">{{person.Geburtstag}}.</span><span ng-show="person.Geburtsmonat">{{person.Geburtsmonat}}.</span>{{person.Geburtsjahr}}<br>
+</span>
+<span ng-show="person.Sterbetag || person.Sterbemonat || person.Sterbejahr">
+    + <span ng-show="person.Sterbetag">{{person.Sterbetag}}.</span><span ng-show="person.Sterbemonat">{{person.Sterbemonat}}.</span>{{person.Sterbejahr}}<br>
+</span>
