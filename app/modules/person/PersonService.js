@@ -14,6 +14,7 @@ define(['angular', 'sjcl', 'angularfire'], function (angular, sjcl) {
                         if (snap.hasOwnProperty(snapPersonId)) {
                             var klartext = sjcl.decrypt('AuGjygdfo8)%lÖI!!AWdbf#KklgklsBHJslk', snap[snapPersonId], {}, {});
                             personen[snapPersonId] = JSON.parse(klartext);
+                            personen[snapPersonId].id = snapPersonId;
 
                             if (warteliste[snapPersonId]) {
                                 warteliste[snapPersonId].resolve(personen[snapPersonId]);

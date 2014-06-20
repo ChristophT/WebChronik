@@ -2,8 +2,22 @@ define(['angular', 'sjcl', 'angularfire'], function (angular, sjcl) {
     "use strict";
 
     var FamilieService = function ($firebase, $q, PersonService) {
-        var familien = {}, getFamilie, loadFamilien, warteliste = {};
+        var familien = {}, getFamilie, loadFamilien, warteliste = {}, getKindFamilie, getElternFamiilien;
         var familenRef = new Firebase('https://resplendent-fire-8728.firebaseio.com/familien');
+
+        function kindEinsortieren(familie, kind, kindId) {
+            if (!familie.kindMap) {
+                familie.kindMap = {};
+            }
+            familie.kindMap[kindId] = kind;
+            familie.kindListe = [];
+            angular.forEach(familie.Kinder, function(kindId) {
+                if (familie.kindMap[kindId]) {
+                    familie.kindListe.push(familie.kindMap[kindId]);
+                }
+            });
+
+        }
 
         function resolvePersonen(familie) {
             if (!familie.mann && familie.MannId) {
@@ -16,6 +30,12 @@ define(['angular', 'sjcl', 'angularfire'], function (angular, sjcl) {
                     familie.frau = person;
                 });
             }
+
+            angular.forEach(familie.Kinder, function(kindId) {
+                PersonService.getPerson(kindId).then(function(person) {
+                    kindEinsortieren(familie, person, kindId);
+                });
+            });
         }
 
         loadFamilien = function () {
@@ -26,14 +46,16 @@ define(['angular', 'sjcl', 'angularfire'], function (angular, sjcl) {
                     for (var snapFamilieId in snap) {
                         if (snap.hasOwnProperty(snapFamilieId)) {
                             var klartext = sjcl.decrypt('AuGjygdfo8)%lÖI!!AWdbf#KklgklsBHJslk', snap[snapFamilieId], {}, {});
-                            familien[snapFamilieId] = JSON.parse(klartext);
+                            var familie = JSON.parse(klartext);
+                            familie.id = snapFamilieId;
+                            familien[snapFamilieId] = familie;
 
                             if (warteliste[snapFamilieId]) {
-                                warteliste[snapFamilieId].resolve(familien[snapFamilieId]);
+                                warteliste[snapFamilieId].resolve(familie);
                                 delete warteliste[snapFamilieId];
                             }
 
-                            resolvePersonen(familien[snapFamilieId]);
+                            resolvePersonen(familie);
                         }
                     }
                 } else {
@@ -58,11 +80,37 @@ define(['angular', 'sjcl', 'angularfire'], function (angular, sjcl) {
             return deferred.promise;
         };
 
+        getKindFamilie = function(person) {
+            for (var familienId in familien) {
+                if (familien.hasOwnProperty(familienId)) {
+                    var familie = familien[familienId];
+                    if (familie.kindMap && familie.kindMap[person.id] === person) {
+                        return familie;
+                    }
+                }
+            }
+        };
+
+        getElternFamiilien = function(person) {
+            var elternFamilien = [];
+            for (var familienId in familien) {
+                if (familien.hasOwnProperty(familienId)) {
+                    var familie = familien[familienId];
+                    if (familie.frau === person || familie.mann == person) {
+                        elternFamilien.push(familie);
+                    }
+                }
+            }
+            return elternFamilien;
+        };
+
         loadFamilien();
 
         return {
             loadFamilien: loadFamilien,
-            getFamilie: getFamilie
+            getFamilie: getFamilie,
+            getKindFamilie: getKindFamilie,
+            getElternFamiilien: getElternFamiilien
         };
     };
 

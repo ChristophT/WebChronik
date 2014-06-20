@@ -2,20 +2,22 @@
 <div class="row">
     <div class="col-sm-2"></div>
     <div class="col-sm-2" style="background-color: lightblue;height: 160px">
-        <fc-person person="familie.frau"></fc-person>
+        <fc-person person="familie.frau" rolle="'mutter'"></fc-person>
     </div>
     <div class="col-sm-2"></div>
     <div class="col-sm-2"></div>
     <div class="col-sm-2" style="background-color: green;height: 160px">
-        <fc-person person="familie.mann"></fc-person>
+        <fc-person person="familie.mann" rolle="'vater'"></fc-person>
     </div>
 
     <div class="col-sm-2"></div>
 </div>
 <div class="row" style="margin-top: 50px">
     <div class="col-sm-{{spaltenVorKindern()}}"></div>
-    <div ng-repeat="kind in familie.Kinder">
-        <div class="col-sm-2" style="height: 160px; border: 1px solid grey">{{kind}}</div>
+    <div ng-repeat="kind in familie.kindListe">
+        <div class="col-sm-2" style="height: 160px; border: 1px solid grey">
+            <fc-person person="kind" rolle="'kind'"></fc-person>
+        </div>
         <div ng-if="!isLetztesKind(kind)" class="col-sm-{{spaltenBreiteZwischenKindern()}}"></div>
     </div>
 </div>

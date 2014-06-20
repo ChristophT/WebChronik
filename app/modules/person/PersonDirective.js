@@ -3,25 +3,61 @@ define(function () {
 
     var PersonDirective;
 
-    PersonDirective = function (PersonService) {
+    PersonDirective = function (FamilieService) {
         return {
             restrict: 'E',
             templateUrl: 'modules/person/PersonTemplate.html',
             scope: {
-                person: '='
+                person: '=',
+                rolle: '='
+            },
+            controller: function($scope) {
+                $scope.getKindFamilie = function() {
+                    if ($scope.kindFamilie) {
+                        return $scope.kindFamilie;
+                    }
+                    if ($scope.rolle === 'vater' || $scope.rolle === 'mutter') {
+                        $scope.kindFamilie = FamilieService.getKindFamilie($scope.person) || null;
+                        return $scope.kindFamilie;
+                    }
+                    return null;
+                };
+
+                $scope.getElternFamilien = function() {
+                    if ($scope.elternFamilien) {
+                        return $scope.elternFamiilien;
+                    }
+                    if ($scope.rolle === 'kind') {
+                        $scope.elternFamiilien = FamilieService.getElternFamiilien($scope.person) || null;
+                        return $scope.elternFamiilien;
+                    }
+                };
+
+                $scope.hatElternFamilien = function() {
+                    return $scope.getElternFamilien() && $scope.getElternFamilien().length > 0;
+                };
+
+                function getGeburtsname(person) {
+                    if (person.Geburtsname) {
+                        return person.Geburtsname;
+                    }
+                    return person.Nachname;
+                }
+
+                $scope.getPartnerGeburtsname = function(elternFamilie) {
+                    if (elternFamilie.frau === $scope.person) {
+                        return getGeburtsname(elternFamilie.mann);
+                    }
+                    if (elternFamilie.mann === $scope.person) {
+                        return getGeburtsname(elternFamilie.frau);
+                    }
+                    return elternFamilie.FamilienName;
+                };
             }
-//            link: function(scope, element, attrs) {
-//                scope.$watch(attrs.personId, function(value) {
-//                    PersonService.getPerson(value).then(function(personAusService) {
-//                        scope.person = personAusService;
-//                    });
-//                });
-//
-//            }
         };
     };
 
-    PersonDirective.$inject = ['PersonService'];
+    PersonDirective.$inject = ['FamilieService'];
 
     return PersonDirective;
 });
