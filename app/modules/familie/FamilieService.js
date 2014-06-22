@@ -91,6 +91,16 @@ define(['angular', 'sjcl', 'angularfire'], function (angular, sjcl) {
             }
         };
 
+        function sortByHochzeitsdatum(familieA, familieB) {
+            function sichereDifferenz(zahlA, zahlB) {
+                var differenz = zahlB - zahlA;
+                if (isNaN(differenz)) {
+                    return 0;
+                }
+            }
+            return sichereDifferenz(familieA.Hochzeitsjahr, familieB.Hochzeitsjahr) * 100 + sichereDifferenz(familieA.Hochzeitsmonat, familieB.Hochzeitsmonat) * 10 + sichereDifferenz(familieA.Hochzeitstag, familieB.Hochzeitstag);
+        }
+
         getElternFamiilien = function(person) {
             if (!person) {
                 return undefined;
@@ -106,6 +116,7 @@ define(['angular', 'sjcl', 'angularfire'], function (angular, sjcl) {
                         }
                     }
                 }
+                elternFamilien = elternFamilien.sort(sortByHochzeitsdatum);
                 person.elternFamilien = elternFamilien;
             }
             return elternFamilien;

@@ -13,6 +13,11 @@ define(function () {
                 rolle: '='
             },
             controller: function($scope) {
+                $scope.isKind = function() {
+                    console.log($scope.rolle);
+                    return $scope.rolle === 'kind';
+                };
+
                 $scope.getKindFamilie = function() {
                     if ($scope.kindFamilie) {
                         return $scope.kindFamilie;
