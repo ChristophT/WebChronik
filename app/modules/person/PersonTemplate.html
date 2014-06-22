@@ -15,3 +15,8 @@
         <li ng-repeat="elternFamilie in getElternFamilien()"><a href="#/familie/{{elternFamilie.id}}">{{getPartnerGeburtsname(elternFamilie)}}</a></li>
     </ul>
 </div>
+<div ng-show="hatAndereEhen">
+    <ul>
+        <li ng-repeat="ehe in getAndereEhen()"><a href="#/familie/{{ehe.id}}">{{getPartnerGeburtsname(ehe)}}</a></li>
+    </ul>
+</div>

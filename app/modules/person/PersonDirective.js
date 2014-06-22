@@ -9,6 +9,7 @@ define(function () {
             templateUrl: 'modules/person/PersonTemplate.html',
             scope: {
                 person: '=',
+                familie: '=',
                 rolle: '='
             },
             controller: function($scope) {
@@ -52,6 +53,20 @@ define(function () {
                         return getGeburtsname(elternFamilie.frau);
                     }
                     return elternFamilie.FamilienName;
+                };
+
+                $scope.getAndereEhen = function() {
+                    if ($scope.rolle === 'vater' || $scope.rolle === 'mutter') {
+                        return FamilieService.getAndereEhen($scope.person, $scope.familie);
+                    }
+                };
+
+                $scope.hatAndereEhen = function() {
+                    if ($scope.rolle === 'vater' || $scope.rolle === 'mutter') {
+                        var andereEhen = FamilieService.getAndereEhen($scope.person, $scope.familie);
+                        return andereEhen && andereEhen.length > 0;
+                    }
+                    return false;
                 };
             }
         };

@@ -2,7 +2,7 @@ define(['angular', 'sjcl', 'angularfire'], function (angular, sjcl) {
     "use strict";
 
     var FamilieService = function ($firebase, $q, PersonService) {
-        var familien = {}, getFamilie, loadFamilien, warteliste = {}, getKindFamilie, getElternFamiilien;
+        var familien = {}, getFamilie, loadFamilien, warteliste = {}, getKindFamilie, getElternFamiilien, getAndereEhen;
         var familenRef = new Firebase('https://resplendent-fire-8728.firebaseio.com/familien');
 
         function kindEinsortieren(familie, kind, kindId) {
@@ -92,16 +92,33 @@ define(['angular', 'sjcl', 'angularfire'], function (angular, sjcl) {
         };
 
         getElternFamiilien = function(person) {
-            var elternFamilien = [];
-            for (var familienId in familien) {
-                if (familien.hasOwnProperty(familienId)) {
-                    var familie = familien[familienId];
-                    if (familie.frau === person || familie.mann == person) {
-                        elternFamilien.push(familie);
+            if (!person) {
+                return undefined;
+            }
+            var elternFamilien = person.elternFamilien;
+            if (!elternFamilien) {
+                elternFamilien = [];
+                for (var familienId in familien) {
+                    if (familien.hasOwnProperty(familienId)) {
+                        var familie = familien[familienId];
+                        if (familie.frau === person || familie.mann === person) {
+                            elternFamilien.push(familie);
+                        }
                     }
                 }
+                person.elternFamilien = elternFamilien;
             }
             return elternFamilien;
+        };
+
+        getAndereEhen = function(person, familie) {
+            var ehen = getElternFamiilien(person), andereEhen = [];
+            angular.forEach(ehen, function(ehe) {
+                if (ehe.id !== familie.id) {
+                    andereEhen.push(ehe);
+                }
+            });
+            return andereEhen;
         };
 
         loadFamilien();
@@ -110,7 +127,8 @@ define(['angular', 'sjcl', 'angularfire'], function (angular, sjcl) {
             loadFamilien: loadFamilien,
             getFamilie: getFamilie,
             getKindFamilie: getKindFamilie,
-            getElternFamiilien: getElternFamiilien
+            getElternFamiilien: getElternFamiilien,
+            getAndereEhen: getAndereEhen
         };
     };
 
