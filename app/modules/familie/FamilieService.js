@@ -93,10 +93,11 @@ define(['angular', 'sjcl', 'angularfire'], function (angular, sjcl) {
 
         function sortByHochzeitsdatum(familieA, familieB) {
             function sichereDifferenz(zahlA, zahlB) {
-                var differenz = zahlB - zahlA;
+                var differenz = zahlA - zahlB;
                 if (isNaN(differenz)) {
                     return 0;
                 }
+                return differenz;
             }
             return sichereDifferenz(familieA.Hochzeitsjahr, familieB.Hochzeitsjahr) * 100 + sichereDifferenz(familieA.Hochzeitsmonat, familieB.Hochzeitsmonat) * 10 + sichereDifferenz(familieA.Hochzeitstag, familieB.Hochzeitstag);
         }

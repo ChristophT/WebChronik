@@ -14,15 +14,18 @@ define(function () {
             },
             controller: function($scope) {
                 $scope.isKind = function() {
-                    console.log($scope.rolle);
                     return $scope.rolle === 'kind';
                 };
+
+                function isElternteil() {
+                    return $scope.rolle === 'vater' || $scope.rolle === 'mutter';
+                }
 
                 $scope.getKindFamilie = function() {
                     if ($scope.kindFamilie) {
                         return $scope.kindFamilie;
                     }
-                    if ($scope.rolle === 'vater' || $scope.rolle === 'mutter') {
+                    if (isElternteil()) {
                         $scope.kindFamilie = FamilieService.getKindFamilie($scope.person) || null;
                         return $scope.kindFamilie;
                     }
@@ -50,6 +53,23 @@ define(function () {
                     return person.Nachname;
                 }
 
+                $scope.getZuvorName = function() {
+                    var zuvorName = '';
+
+                    if (!$scope.person) {
+                        return undefined;
+                    }
+                    if ($scope.hatAndereEhen()) {
+                        var alleEhen = FamilieService.getElternFamiilien($scope.person);
+
+                        if (alleEhen[alleEhen.length - 1].id !== $scope.familie.id) {
+                            zuvorName = '(zuvor ' + $scope.familie.FamilienName + ') ';
+                        }
+                    }
+
+                    return zuvorName;
+                };
+
                 $scope.getPartnerGeburtsname = function(elternFamilie) {
                     if (elternFamilie.frau === $scope.person) {
                         return getGeburtsname(elternFamilie.mann);
@@ -61,13 +81,13 @@ define(function () {
                 };
 
                 $scope.getAndereEhen = function() {
-                    if ($scope.rolle === 'vater' || $scope.rolle === 'mutter') {
+                    if (isElternteil()) {
                         return FamilieService.getAndereEhen($scope.person, $scope.familie);
                     }
                 };
 
                 $scope.hatAndereEhen = function() {
-                    if ($scope.rolle === 'vater' || $scope.rolle === 'mutter') {
+                    if (isElternteil()) {
                         var andereEhen = FamilieService.getAndereEhen($scope.person, $scope.familie);
                         return andereEhen && andereEhen.length > 0;
                     }

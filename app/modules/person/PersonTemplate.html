@@ -1,9 +1,9 @@
 {{person.Vorname1}} <span ng-class="person.Vorname1 || person.Vorname2 ? 'rufname' : ''">{{person.Rufname}}</span> {{person.Vorname2}}<br>
 <div ng-hide="isKind()">
     <div ng-show="getKindFamilie()">
-        <a ng-show="!person.Geburtsname" href="#/familie/{{getKindFamilie().id}}">{{person.Nachname}}</a> <span ng-show="person.Geburtsname">{{person.Nachname}} geb. <a href="#/familie/{{getKindFamilie().id}}">{{person.Geburtsname}}</a></span>
+        <a ng-show="!person.Geburtsname" href="#/familie/{{getKindFamilie().id}}">{{person.Nachname}}</a> <span ng-show="person.Geburtsname">{{person.Nachname}} {{getZuvorName()}} geb. <a href="#/familie/{{getKindFamilie().id}}">{{person.Geburtsname}}</a></span>
     </div>
-    <div ng-hide="getKindFamilie()">{{person.Nachname}} <span ng-show="person.Geburtsname">geb. {{person.Geburtsname}}</span></div><br>
+    <div ng-hide="getKindFamilie()">{{person.Nachname}} {{getZuvorName()}} <span ng-show="person.Geburtsname">geb. {{person.Geburtsname}}</span></div><br>
 </div>
 <span ng-show="person.Geburtstag || person.Geburtsmonat || person.Geburtsjahr">
     * <span ng-show="person.Geburtstag">{{person.Geburtstag}}.</span><span ng-show="person.Geburtsmonat">{{person.Geburtsmonat}}.</span>{{person.Geburtsjahr}}<br>
