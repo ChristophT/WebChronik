@@ -93,6 +93,15 @@ define(function () {
                     }
                     return false;
                 };
+
+                $scope.getImgClass = function() {
+                    if ($scope.rolle === 'vater') {
+                        return 'pull-left';
+                    } else if ($scope.rolle === 'mutter') {
+                        return 'pull-right';
+                    }
+                    return '';
+                };
             }
         };
     };

@@ -1,12 +1,11 @@
 <span style="margin-top: 50px;"><h1>{{familie.FamilienName}} {{familie.Hochzeitsjahr}}</h1></span>
 <div class="row">
     <div class="col-sm-2"></div>
-    <div class="col-sm-2" style="background-color: lightblue;height: 160px">
+    <div class="col-sm-3">
         <fc-person person="familie.frau" familie="familie" rolle="'mutter'"></fc-person>
     </div>
     <div class="col-sm-2"></div>
-    <div class="col-sm-2"></div>
-    <div class="col-sm-2" style="background-color: green;height: 160px">
+    <div class="col-sm-3">
         <fc-person person="familie.mann" familie="familie" rolle="'vater'"></fc-person>
     </div>
 
@@ -15,7 +14,7 @@
 <div class="row" style="margin-top: 50px">
     <div class="col-sm-{{spaltenVorKindern()}}"></div>
     <div ng-repeat="kind in familie.kindListe">
-        <div class="col-sm-2" style="height: 160px; border: 1px solid grey">
+        <div class="col-sm-2">
             <fc-person person="kind" familie="familie" rolle="'kind'"></fc-person>
         </div>
         <div ng-if="!isLetztesKind(kind)" class="col-sm-{{spaltenBreiteZwischenKindern()}}"></div>

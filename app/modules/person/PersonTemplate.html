@@ -1,23 +1,30 @@
-{{person.Vorname1}} <span ng-class="person.Vorname1 || person.Vorname2 ? 'rufname' : ''">{{person.Rufname}}</span> {{person.Vorname2}}<br>
-<div ng-hide="isKind()">
-    <div ng-show="getKindFamilie()">
-        <a ng-show="!person.Geburtsname" href="#/familie/{{getKindFamilie().id}}">{{person.Nachname}}</a> <span ng-show="person.Geburtsname">{{person.Nachname}} {{getZuvorName()}} geb. <a href="#/familie/{{getKindFamilie().id}}">{{person.Geburtsname}}</a></span>
+<div class="media">
+    <div ng-class="getImgClass()">
+        <img class="media-object img-rounded" src="http://hardt-thelen.de/Chronik/STB-HTM/{{person.Passbild}}" />
     </div>
-    <div ng-hide="getKindFamilie()">{{person.Nachname}} {{getZuvorName()}} <span ng-show="person.Geburtsname">geb. {{person.Geburtsname}}</span></div><br>
-</div>
-<span ng-show="person.Geburtstag || person.Geburtsmonat || person.Geburtsjahr">
-    * <span ng-show="person.Geburtstag">{{person.Geburtstag}}.</span><span ng-show="person.Geburtsmonat">{{person.Geburtsmonat}}.</span>{{person.Geburtsjahr}}<br>
-</span>
-<span ng-show="person.Sterbetag || person.Sterbemonat || person.Sterbejahr">
-    + <span ng-show="person.Sterbetag">{{person.Sterbetag}}.</span><span ng-show="person.Sterbemonat">{{person.Sterbemonat}}.</span>{{person.Sterbejahr}}<br>
-</span>
-<div ng-show="hatElternFamilien">
-    <ul>
-        <li ng-repeat="elternFamilie in getElternFamilien()"><a href="#/familie/{{elternFamilie.id}}">{{getPartnerGeburtsname(elternFamilie)}}</a></li>
-    </ul>
-</div>
-<div ng-show="hatAndereEhen">
-    <ul>
-        <li ng-repeat="ehe in getAndereEhen()"><a href="#/familie/{{ehe.id}}">{{getPartnerGeburtsname(ehe)}}</a></li>
-    </ul>
+    <div class="media-body">
+        {{person.Vorname1}} <span ng-class="person.Vorname1 || person.Vorname2 ? 'rufname' : ''">{{person.Rufname}}</span> {{person.Vorname2}}<br>
+        <div ng-hide="isKind()">
+            <div ng-show="getKindFamilie()">
+                <a ng-show="!person.Geburtsname" href="#/familie/{{getKindFamilie().id}}">{{person.Nachname}}</a> <span ng-show="person.Geburtsname">{{person.Nachname}} {{getZuvorName()}} geb. <a href="#/familie/{{getKindFamilie().id}}">{{person.Geburtsname}}</a></span>
+            </div>
+            <div ng-hide="getKindFamilie()">{{person.Nachname}} {{getZuvorName()}} <span ng-show="person.Geburtsname">geb. {{person.Geburtsname}}</span></div><br>
+        </div>
+        <span ng-show="person.Geburtstag || person.Geburtsmonat || person.Geburtsjahr">
+            * <span ng-show="person.Geburtstag">{{person.Geburtstag}}.</span><span ng-show="person.Geburtsmonat">{{person.Geburtsmonat}}.</span>{{person.Geburtsjahr}}<br>
+        </span>
+        <span ng-show="person.Sterbetag || person.Sterbemonat || person.Sterbejahr">
+            + <span ng-show="person.Sterbetag">{{person.Sterbetag}}.</span><span ng-show="person.Sterbemonat">{{person.Sterbemonat}}.</span>{{person.Sterbejahr}}<br>
+        </span>
+        <div ng-show="hatElternFamilien">
+            <ul>
+                <li ng-repeat="elternFamilie in getElternFamilien()"><a href="#/familie/{{elternFamilie.id}}">{{getPartnerGeburtsname(elternFamilie)}}</a></li>
+            </ul>
+        </div>
+        <div ng-show="hatAndereEhen">
+            <ul>
+                <li ng-repeat="ehe in getAndereEhen()"><a href="#/familie/{{ehe.id}}">{{getPartnerGeburtsname(ehe)}}</a></li>
+            </ul>
+        </div>
+    </div>
 </div>
