@@ -12,7 +12,8 @@
     "almond": "0.2.x",
     "requirejs": "2.1.x",
     "sjcl": "1.0.x",
-    "angularfire": "x"
+    "angularfire": "x",
+    "ngActivityIndicator": "~0.1.5"
   },
   "devDependencies": {
     "angular-mocks": "1.2.x"

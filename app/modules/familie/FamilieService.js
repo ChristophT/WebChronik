@@ -1,7 +1,7 @@
 define(['angular', 'sjcl', 'angularfire'], function (angular, sjcl) {
     "use strict";
 
-    var FamilieService = function ($firebase, $q, PersonService) {
+    var FamilieService = function ($firebase, $q, PersonService, $activityIndicator) {
         var familien = {}, getFamilie, loadFamilien, warteliste = {}, getKindFamilie, getElternFamiilien, getAndereEhen;
         var familenRef = new Firebase('https://resplendent-fire-8728.firebaseio.com/familien');
 
@@ -39,6 +39,7 @@ define(['angular', 'sjcl', 'angularfire'], function (angular, sjcl) {
         }
 
         loadFamilien = function () {
+            $activityIndicator.startAnimating();
             var familienQuelle = $firebase(familenRef);
 
             familienQuelle.$on('loaded', function (snap) {
@@ -61,6 +62,7 @@ define(['angular', 'sjcl', 'angularfire'], function (angular, sjcl) {
                 } else {
                     console.log('snap enthält nicht das erwartete Array');
                 }
+                $activityIndicator.stopAnimating();
             });
         };
 
@@ -144,7 +146,7 @@ define(['angular', 'sjcl', 'angularfire'], function (angular, sjcl) {
         };
     };
 
-    FamilieService.$inject = ['$firebase', '$q', 'PersonService'];
+    FamilieService.$inject = ['$firebase', '$q', 'PersonService', '$activityIndicator'];
 
     return FamilieService;
 });

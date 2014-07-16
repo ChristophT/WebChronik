@@ -7,12 +7,14 @@
 			'angular-mocks': '../../../bower_components/angular-mocks/angular-mocks',
             'sjcl': '../../../bower_components/sjcl/sjcl',
             'firebase': '../../../bower_components/firebase/firebase',
-            'angularfire': '../../../bower_components/angularfire/angularfire.min'
+            'angularfire': '../../../bower_components/angularfire/angularfire.min',
+            'ngActivityIndicator': '../../../bower_components/ngActivityIndicator/ngActivityIndicator.min'
 		},
 		shim: {
 			'angular': { deps: [], exports: 'angular' },
 			'angular-route': {deps: ['angular']},
 			'angular-mocks': {deps: ['angular']},
+			'ngActivityIndicator': {deps: ['angular']},
             'sjcl': {exports: 'sjcl'},
             'firebase': {exports: 'firebase'},
             'angularfire': {deps: ['firebase'], exports: 'angularfire'}

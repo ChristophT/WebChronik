@@ -102,6 +102,21 @@ define(function () {
                     }
                     return '';
                 };
+                $scope.getMediaBodyClass = function() {
+                    if ($scope.rolle === 'mutter') {
+                        return 'rightalign';
+                    }
+                    return '';
+                };
+                $scope.isPassbildVorhanden = function() {
+                    return $scope.person  && $scope.person.Passbild;
+                };
+                $scope.getPassbildUrl = function() {
+                    if($scope.isPassbildVorhanden()) {
+                        return 'http://hardt-thelen.de/Chronik/STB-HTM/' + $scope.person.Passbild;
+                    }
+                    return '';
+                };
             }
         };
     };

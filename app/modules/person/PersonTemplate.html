@@ -1,8 +1,8 @@
 <div class="media">
-    <div ng-class="getImgClass()">
-        <img class="media-object img-rounded" src="http://hardt-thelen.de/Chronik/STB-HTM/{{person.Passbild}}" />
+    <div ng-class="getImgClass()" ng-if="isPassbildVorhanden()">
+        <img ng-if="isPassbildVorhanden()" class="media-object img-rounded" src="{{getPassbildUrl()}}" />
     </div>
-    <div class="media-body">
+    <div class="media-body" ng-class="getMediaBodyClass()">
         {{person.Vorname1}} <span ng-class="person.Vorname1 || person.Vorname2 ? 'rufname' : ''">{{person.Rufname}}</span> {{person.Vorname2}}<br>
         <div ng-hide="isKind()">
             <div ng-show="getKindFamilie()">

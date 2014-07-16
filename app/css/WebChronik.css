@@ -19,3 +19,15 @@
 .rufname {
     text-decoration: underline;
 }
+
+.rightalign {
+    text-align: right;
+}
+
+.loading-spinner .ai-white-spin {
+    border-color: rgba(25,25,25,.5)rgba(25,25,25,.5)#888 #333;
+    margin-top: 150px;
+    float: none;
+    margin-left: auto;
+    margin-right: auto;
+}
