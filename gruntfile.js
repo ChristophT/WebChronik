@@ -85,7 +85,7 @@ module.exports = function (grunt) {
 				files: [{
 					expand: true,
 					dest: '<%=pkg.folders.build + pkg.name + "-" + pkg.version %>/modules/',
-					src: ['**', '!**/*.js', "!**/README"],
+					src: ['**', "!**/README"],
 					cwd: '<%= pkg.folders.wwwRoot%>modules/'
 				}]
 			},
@@ -113,7 +113,7 @@ module.exports = function (grunt) {
 							//include all css files in correct order, add new files in desired order
 //							'<%=pkg.folders.build + pkg.name + "-" + pkg.version %>/css/bootstrap.css',
 //							'<%=pkg.folders.build + pkg.name + "-" + pkg.version %>/css/bootstrap-responsive.css',
-							'<%=pkg.folders.build + pkg.name + "-" + pkg.version %>/css/project.css'
+							'<%=pkg.folders.build + pkg.name + "-" + pkg.version %>/css/WebChronik.css'
 						]
 				}
 			}
@@ -149,13 +149,13 @@ module.exports = function (grunt) {
 			compile: {
 				options: {
 					baseUrl: "<%= pkg.folders.jsSource %>",
-					name: "../../../bower_components/almond/almond",
+					name: "../../bower_components/almond/almond",
 					include: "main",
 					mainConfigFile: "<%= pkg.folders.jsSource %>/main.js",
 					out: "<%= pkg.folders.build + pkg.name + '-' + pkg.version %>/modules/main.js",
 					optimize: "none",
 					paths: {
-						'angular':'../../../bower_components/angular/angular.min',
+						'angular':'../../bower_components/angular/angular.min',
 						'config/configuration': 'config/<%=configuration%>'
 					},
 					generateSourceMaps: true,

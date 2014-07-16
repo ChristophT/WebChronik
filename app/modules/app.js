@@ -5,7 +5,7 @@ define(['angular', 'config/config', 'angular-route', 'familie/familie', 'person/
 
 	app.config(['$httpProvider', '$routeProvider', function ($httpProvider, $routeProvider) {
 
-		$routeProvider.otherwise({redirectTo: '/familie/1'});
+		$routeProvider.otherwise({redirectTo: '/familie/439'});
 	}]);
 
 	return app;
