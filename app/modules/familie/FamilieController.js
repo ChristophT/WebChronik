@@ -39,6 +39,63 @@ define(function () {
         $scope.isLetztesKind = function(kind) {
             return isFamilieDefined() && kind === $scope.familie.Kinder[$scope.familie.Kinder.length - 1];
         };
+
+        $scope.isVerheiratet = function() {
+            var hochzeitsdatum = $scope.getHochzeitsdatum();
+
+            return hochzeitsdatum && hochzeitsdatum.length > 0;
+        };
+
+        $scope.getHochzeitsdatum = function() {
+            if (! $scope.familie) {
+                return undefined;
+            }
+            return baueDatum($scope.familie.Hochzeitstag,
+                $scope.familie.Hochzeitsmonat,
+                $scope.familie.Hochzeitsjahr);
+        };
+
+        $scope.isGeschieden = function() {
+            if (! $scope.familie) {
+                return undefined;
+            }
+
+            return $scope.familie.geschieden;
+        };
+
+        $scope.getScheidungsdatum = function() {
+            if (! $scope.familie) {
+                return undefined;
+            }
+            return baueDatum($scope.familie.Scheidungstag,
+                $scope.familie.Scheidungsmonat,
+                $scope.familie.Scheidungsjahr);
+        };
+
+        function baueDatum(tag, monat, jahr) {
+            var datum = '';
+            function addDot() {
+                if (datum) {
+                    datum = datum + '.';
+                }
+            }
+
+            if (tag) {
+                datum = tag;
+            }
+            if (monat) {
+                addDot();
+                datum = datum + monat;
+            } else if (tag) {
+                addDot();
+                datum = datum + '?';
+            }
+            if (jahr) {
+                addDot();
+                datum = datum + jahr;
+            }
+            return datum;
+        }
     };
 
     FamilieController.$inject = ['$scope', '$routeParams', 'FamilieService', 'PersonService'];

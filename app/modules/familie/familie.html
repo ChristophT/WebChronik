@@ -1,10 +1,13 @@
-<span style="margin-top: 50px;"><h1>{{familie.FamilienName}} {{familie.Hochzeitsjahr}}</h1></span>
+<span style="margin-top: 50px;" class="text-center"><h1>{{familie.FamilienName}} {{familie.Hochzeitsjahr}}</h1></span>
 <div class="row">
     <div class="col-md-2"></div>
     <div class="col-md-3">
         <fc-person person="familie.frau" familie="familie" rolle="'mutter'"></fc-person>
     </div>
-    <div class="col-md-2"></div>
+    <div class="col-md-2 text-center" style="margin-top: 20px">
+        <span ng-if="isVerheiratet()">oo {{getHochzeitsdatum()}}<br>{{familie.Hochzeitsort}}<br></span>
+        <span ng-if="isGeschieden()">o/o {{getScheidungsdatum()}}<br>{{familie.Scheidungsort}}</span>
+    </div>
     <div class="col-md-3">
         <fc-person person="familie.mann" familie="familie" rolle="'vater'"></fc-person>
     </div>
@@ -20,5 +23,3 @@
         <div ng-if="!isLetztesKind(kind)" class="col-md-{{spaltenBreiteZwischenKindern()}}"></div>
     </div>
 </div>
-
-<!--<div ng-hide="familie.frau" style="position: fixed; z-index: 100; opacity: 0.5">Lade Daten</div>-->

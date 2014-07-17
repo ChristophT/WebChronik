@@ -62,7 +62,7 @@ define(function () {
                     if ($scope.hatAndereEhen()) {
                         var alleEhen = FamilieService.getElternFamiilien($scope.person);
 
-                        if (alleEhen[alleEhen.length - 1].id !== $scope.familie.id) {
+                        if (alleEhen[alleEhen.length - 1].id !== $scope.familie.id && $scope.familie.FamilienName !== $scope.person.Nachname) {
                             zuvorName = '(zuvor ' + $scope.familie.FamilienName + ') ';
                         }
                     }
@@ -115,7 +115,7 @@ define(function () {
                     if($scope.isPassbildVorhanden()) {
                         return 'http://hardt-thelen.de/Chronik/STB-HTM/' + $scope.person.Passbild;
                     }
-                    return '';
+                    return 'http://hardt-thelen.de/Chronik/STB-HTM/bilder/nixbild.gif';
                 };
             }
         };

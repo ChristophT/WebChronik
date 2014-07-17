@@ -1,6 +1,6 @@
 <div class="media">
-    <div ng-class="getImgClass()" ng-if="isPassbildVorhanden()">
-        <img ng-if="isPassbildVorhanden()" class="media-object img-rounded" src="{{getPassbildUrl()}}" />
+    <div ng-class="getImgClass()">
+        <img class="media-object img-rounded" src="{{getPassbildUrl()}}" />
     </div>
     <div class="media-body" ng-class="getMediaBodyClass()">
         {{person.Vorname1}} <span ng-class="person.Vorname1 || person.Vorname2 ? 'rufname' : ''">{{person.Rufname}}</span> {{person.Vorname2}}<br>
@@ -16,15 +16,14 @@
         <span ng-show="person.Sterbetag || person.Sterbemonat || person.Sterbejahr">
             + <span ng-show="person.Sterbetag">{{person.Sterbetag}}.</span><span ng-show="person.Sterbemonat">{{person.Sterbemonat}}.</span>{{person.Sterbejahr}}<br>
         </span>
-        <div ng-show="hatElternFamilien">
+        <div ng-show="hatElternFamilien()">
             <ul>
                 <li ng-repeat="elternFamilie in getElternFamilien()"><a href="#/familie/{{elternFamilie.id}}">{{getPartnerGeburtsname(elternFamilie)}}</a></li>
             </ul>
         </div>
-        <div ng-show="hatAndereEhen">
-            <ul>
-                <li ng-repeat="ehe in getAndereEhen()"><a href="#/familie/{{ehe.id}}">{{getPartnerGeburtsname(ehe)}}</a></li>
-            </ul>
+        <div ng-show="hatAndereEhen()" class="list-group text-left">
+            Andere Ehen:<br>
+            <a href="#/familie/{{ehe.id}}" class="list-group-item" ng-repeat="ehe in getAndereEhen()">{{getPartnerGeburtsname(ehe)}} <span class="glyphicon glyphicon-share-alt pull-right"></span></a>
         </div>
     </div>
 </div>
