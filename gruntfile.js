@@ -153,12 +153,12 @@ module.exports = function (grunt) {
 					include: "main",
 					mainConfigFile: "<%= pkg.folders.jsSource %>/main.js",
 					out: "<%= pkg.folders.build + pkg.name + '-' + pkg.version %>/modules/main.js",
-					optimize: "none",
+					optimize: "uglify",
 					paths: {
 						'angular':'../../bower_components/angular/angular.min',
 						'config/configuration': 'config/<%=configuration%>'
 					},
-					generateSourceMaps: true,
+					generateSourceMaps: false,
 					preserveLicenseComments: true,
 					useSourceUrl: true,
 					uglify2: {
